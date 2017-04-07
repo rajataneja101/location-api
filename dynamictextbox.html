@@ -1,0 +1,33 @@
+
+<input id="btnAdd" type="button" value="Add" />
+<br />
+<br />
+<div id="TextBoxContainer">
+    <!--Textboxes will be added here -->
+</div>
+<br />
+<input id="btnGet" type="button" value="Get Values" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    $("#btnAdd").bind("click", function () {
+        var div = $("<div />");
+        div.html(GetDynamicTextBox(""));
+        $("#TextBoxContainer").append(div);
+    });
+    $("#btnGet").bind("click", function () {
+        var values = "";
+        $("input[name=DynamicTextBox]").each(function () {
+            values += $(this).val() + "\n";
+        });
+        alert(values);
+    });
+    $("body").on("click", ".remove", function () {
+        $(this).closest("div").remove();
+    });
+});
+function GetDynamicTextBox(value) {
+    return '<input name = "DynamicTextBox" type="text" value = "' + value + '" />&nbsp;' +
+            '<input type="button" value="Remove" class="remove" />'
+}
+</script>
